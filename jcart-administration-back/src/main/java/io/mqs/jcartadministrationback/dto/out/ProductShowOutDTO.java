@@ -15,6 +15,15 @@ public class ProductShowOutDTO {
     private Integer sortOrder;
     private String description;
     private List<String> otherPicUrls;
+    private String productAbstract;
+
+    public String getProductAbstract() {
+        return productAbstract;
+    }
+
+    public void setProductAbstract(String productAbstract) {
+        this.productAbstract = productAbstract;
+    }
 
     public Integer getProductId() {
         return productId;

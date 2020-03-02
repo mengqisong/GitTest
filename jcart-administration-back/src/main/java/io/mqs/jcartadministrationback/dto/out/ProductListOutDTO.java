@@ -6,9 +6,33 @@ public class ProductListOutDTO {
     private String productCode;
     private Double price;
     private Double discount;
+    private String productAbstract;
     private String stockQuantity;
     private Byte status;
     private String mainPicUrl;
+
+    @Override
+    public String toString() {
+        return "ProductListOutDTO{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
+                ", productCode='" + productCode + '\'' +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", productAbstract='" + productAbstract + '\'' +
+                ", stockQuantity='" + stockQuantity + '\'' +
+                ", status=" + status +
+                ", mainPicUrl='" + mainPicUrl + '\'' +
+                '}';
+    }
+
+    public String getProductAbstract() {
+        return productAbstract;
+    }
+
+    public void setProductAbstract(String productAbstract) {
+        this.productAbstract = productAbstract;
+    }
 
     public Integer getProductId() {
         return productId;

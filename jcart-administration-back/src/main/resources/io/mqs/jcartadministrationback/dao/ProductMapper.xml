@@ -22,6 +22,8 @@
     <result column="price" jdbcType="DOUBLE" property="price" />
     <result column="discount" jdbcType="DOUBLE" property="discount" />
     <result column="stock_quantity" jdbcType="INTEGER" property="stockQuantity" />
+    <result column="product_abstract" jdbcType="VARCHAR" property="productAbstract" />
+
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="main_pic_url" jdbcType="VARCHAR" property="mainPicUrl" />
   </resultMap>

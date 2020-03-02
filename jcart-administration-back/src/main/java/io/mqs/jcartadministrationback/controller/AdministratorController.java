@@ -1,30 +1,67 @@
 package io.mqs.jcartadministrationback.controller;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+import io.mqs.jcartadministrationback.constant.ClientExceptionConstant;
 import io.mqs.jcartadministrationback.dto.in.*;
-import io.mqs.jcartadministrationback.dto.out.AdministratorGetProfileOutDTO;
-import io.mqs.jcartadministrationback.dto.out.AdministratorListOutDTO;
-import io.mqs.jcartadministrationback.dto.out.AdministratorShowOutDTO;
-import io.mqs.jcartadministrationback.dto.out.PageOutDTO;
+import io.mqs.jcartadministrationback.dto.out.*;
+import io.mqs.jcartadministrationback.exception.ClientException;
+import io.mqs.jcartadministrationback.po.Administrator;
+import io.mqs.jcartadministrationback.service.AdministratorService;
+import io.mqs.jcartadministrationback.util.JWTUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/administrator")
 public class AdministratorController {
 
+    @Autowired
+    private AdministratorService administratorService;
+
+    @Autowired
+    private JWTUtil jwtUtil;
+
     //登录
     @GetMapping("/login")
-    public String login(AdministratorLoginInDTO administratorLoginInDTO){
-        return null;
+    public AdministratorLoginOutDTO login(AdministratorLoginInDTO administratorLoginInDTO) throws ClientException {
+        Administrator administrator = administratorService.getByUsername(administratorLoginInDTO.getUsername());
+        if (administrator == null){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_USERNAME_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_USERNAME_NOT_EXIST_ERRMSG);
+        }
+        String encPwdDB = administrator.getEncryptedPassword();
+        BCrypt.Result result = BCrypt.verifyer().verify(administratorLoginInDTO.getPassword().toCharArray(), encPwdDB);
+
+        if (result.verified) {
+            AdministratorLoginOutDTO administratorLoginOutDTO = jwtUtil.issueToken(administrator);
+            return administratorLoginOutDTO;
+        }else {
+            throw new ClientException(ClientExceptionConstant.ADNINISTRATOR_PASSWORD_INVALID_ERRCODE, ClientExceptionConstant.ADNINISTRATOR_PASSWORD_INVALID_ERRMSG);
+        }
     }
 
     //获取
+    @GetMapping("/getProfile")
     public AdministratorGetProfileOutDTO getProfile(Integer administratorId){
-        return null;
+        Administrator administrator = administratorService.getById(administratorId);
+        AdministratorGetProfileOutDTO administratorGetProfileOutDTO = new AdministratorGetProfileOutDTO();
+        administratorGetProfileOutDTO.setAdministratorId(administrator.getAdministratorId());
+        administratorGetProfileOutDTO.setUsername(administrator.getUsername());
+        administratorGetProfileOutDTO.setEmail(administrator.getEmail());
+        administratorGetProfileOutDTO.setAvatarUrl(administrator.getAvatarUrl());
+
+        return administratorGetProfileOutDTO;
     }
 
     //更新
     @PostMapping("/updateProfile")
-    public void updateProdfile(@RequestBody AdministratorUpdateProfileInDTO AdministratorUpdateProfileInDTO){
+    public void updateProdfile(@RequestBody AdministratorUpdateProfileInDTO administratorUpdateProfileInDTO,
+                               @RequestAttribute Integer administratorId){
+        Administrator administrator = new Administrator();
+        administrator.setAdministratorId(administratorId);
+        administrator.setEmail(administratorUpdateProfileInDTO.getEmail());
+        administrator.setAvatarUrl(administratorUpdateProfileInDTO.getAvatarUrl());
+        administratorService.update(administrator);
+
     }
 
     //拿到重置密码
