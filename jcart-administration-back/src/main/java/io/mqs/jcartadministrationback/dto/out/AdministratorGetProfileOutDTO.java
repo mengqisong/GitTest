@@ -6,7 +6,7 @@ public class AdministratorGetProfileOutDTO {
     private String realname;
     private String email;
     private String avatarUrl;
-    private Long createTime;
+    private Long createTimestamp;
 
     public Integer getAdministratorId() {
         return administratorId;
@@ -48,11 +48,11 @@ public class AdministratorGetProfileOutDTO {
         this.avatarUrl = avatarUrl;
     }
 
-    public Long getCreateTime() {
-        return createTime;
+    public Long getCreateTimestamp() {
+        return createTimestamp;
     }
 
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
+    public void setCreateTimestamp(Long createTimestamp) {
+        this.createTimestamp = createTimestamp;
     }
 }

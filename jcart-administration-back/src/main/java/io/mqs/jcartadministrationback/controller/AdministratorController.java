@@ -52,7 +52,7 @@ public class AdministratorController {
         administratorGetProfileOutDTO.setEmail(administrator.getEmail());
         administratorGetProfileOutDTO.setRealname(administrator.getRealName());
         administratorGetProfileOutDTO.setUsername(administrator.getUsername());
-        administratorGetProfileOutDTO.setCreateTime(administrator.getCreateTime().getTime());
+        administratorGetProfileOutDTO.setCreateTimestamp(administrator.getCreateTime().getTime());
         return administratorGetProfileOutDTO;
     }
 
