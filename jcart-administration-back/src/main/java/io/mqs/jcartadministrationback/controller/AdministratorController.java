@@ -24,7 +24,6 @@ public class AdministratorController {
     @Autowired
     private JWTUtil jwtUtil;
 
-    //登录
     @GetMapping("/login")
     public AdministratorLoginOutDTO login(AdministratorLoginInDTO administratorLoginInDTO) throws ClientException {
         Administrator administrator = administratorService.getByUsername(administratorLoginInDTO.getUsername());
@@ -42,39 +41,47 @@ public class AdministratorController {
         }
     }
 
-    //获取
-    public AdministratorGetProfileOutDTO getProfile(Integer administratorId){
-        return null;
+    @GetMapping("/getProfile")
+    public AdministratorGetProfileOutDTO getProfile(@RequestAttribute Integer administratorId){
+         Administrator administrator = administratorService.getProfile(administratorId);
+
+        AdministratorGetProfileOutDTO administratorGetProfileOutDTO = new AdministratorGetProfileOutDTO();
+        administratorGetProfileOutDTO.setAdministratorId(administrator.getAdministratorId());
+        administratorGetProfileOutDTO.setAvatarUrl(administrator.getAvatarUrl());
+        administratorGetProfileOutDTO.setEmail(administrator.getEmail());
+        administratorGetProfileOutDTO.setRealname(administrator.getRealName());
+        administratorGetProfileOutDTO.setUsername(administrator.getUsername());
+        administratorGetProfileOutDTO.setCreateTime(administrator.getCreateTime().getTime());
+        return administratorGetProfileOutDTO;
     }
 
-    //更新
     @PostMapping("/updateProfile")
-    public void updateProdfile(@RequestBody AdministratorUpdateProfileInDTO AdministratorUpdateProfileInDTO){
+    public void updateProdfile(@RequestBody AdministratorUpdateProfileInDTO AdministratorUpdateProfileInDTO,
+                               @RequestAttribute Integer administratorId){
     }
 
-    //拿到重置密码
+    @PostMapping("/changepwd")
+    public void changepwd(@RequestBody AdministratorChangePwdInDTO administratorChangePwdInDTO,
+                          @RequestAttribute Integer administratorId){}
+
     @GetMapping("/getPwdReseCode")
     public String getPwdReseCode(@RequestParam String email){
         return null;
     }
 
-    //重置密码
     @PostMapping("/restPwd")
     public void restPwd(@RequestBody AdministratorRestPwdInDTO administratorRestPwdInDTO){}
 
-   //分页
     @GetMapping("/getList")
    public PageOutDTO<AdministratorListOutDTO> getList(@RequestParam Integer pageNum){
         return  null;
    }
 
-   //回显
     @GetMapping("/getById")
     public AdministratorShowOutDTO getById(@RequestParam Integer administratorId){
         return null;
     }
 
-    //创建
     @PostMapping("/crate")
     public Integer crate(@RequestBody AdministratorCrateInDTO administratorCrateInDTO){
         Administrator administrator = new Administrator();

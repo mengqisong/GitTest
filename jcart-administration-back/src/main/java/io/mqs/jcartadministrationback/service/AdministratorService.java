@@ -9,4 +9,6 @@ public interface AdministratorService {
     Administrator getByUsername(String username);
 
     Integer create(Administrator administrator);
+
+    Administrator getProfile(Integer administratorId);
 }

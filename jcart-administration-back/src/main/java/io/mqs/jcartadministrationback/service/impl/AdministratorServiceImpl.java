@@ -1,6 +1,7 @@
 package io.mqs.jcartadministrationback.service.impl;
 
 import io.mqs.jcartadministrationback.dao.AdministratorMapper;
+import io.mqs.jcartadministrationback.dto.out.AdministratorGetProfileOutDTO;
 import io.mqs.jcartadministrationback.po.Administrator;
 import io.mqs.jcartadministrationback.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +22,11 @@ public class AdministratorServiceImpl implements AdministratorService {
         administratorMapper.insertSelective(administrator);
         return administrator.getAdministratorId();
     }
+
+    @Override
+    public Administrator getProfile(Integer administratorId) {
+        return administratorMapper.selectByPrimaryKey(administratorId);
+    }
+
+
 }
