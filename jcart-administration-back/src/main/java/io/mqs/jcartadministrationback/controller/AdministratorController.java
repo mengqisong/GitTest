@@ -16,6 +16,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/administrator")
+@CrossOrigin
 public class AdministratorController {
 
     @Autowired
