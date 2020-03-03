@@ -4,12 +4,15 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import io.mqs.jcartadministrationback.constant.ClientExceptionConstant;
 import io.mqs.jcartadministrationback.dto.in.*;
 import io.mqs.jcartadministrationback.dto.out.*;
+import io.mqs.jcartadministrationback.enumeration.AdministratorStatus;
 import io.mqs.jcartadministrationback.exception.ClientException;
 import io.mqs.jcartadministrationback.po.Administrator;
 import io.mqs.jcartadministrationback.service.AdministratorService;
 import io.mqs.jcartadministrationback.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @RestController
 @RequestMapping("/administrator")
@@ -40,28 +43,13 @@ public class AdministratorController {
     }
 
     //获取
-    @GetMapping("/getProfile")
     public AdministratorGetProfileOutDTO getProfile(Integer administratorId){
-        Administrator administrator = administratorService.getById(administratorId);
-        AdministratorGetProfileOutDTO administratorGetProfileOutDTO = new AdministratorGetProfileOutDTO();
-        administratorGetProfileOutDTO.setAdministratorId(administrator.getAdministratorId());
-        administratorGetProfileOutDTO.setUsername(administrator.getUsername());
-        administratorGetProfileOutDTO.setEmail(administrator.getEmail());
-        administratorGetProfileOutDTO.setAvatarUrl(administrator.getAvatarUrl());
-
-        return administratorGetProfileOutDTO;
+        return null;
     }
 
     //更新
     @PostMapping("/updateProfile")
-    public void updateProdfile(@RequestBody AdministratorUpdateProfileInDTO administratorUpdateProfileInDTO,
-                               @RequestAttribute Integer administratorId){
-        Administrator administrator = new Administrator();
-        administrator.setAdministratorId(administratorId);
-        administrator.setEmail(administratorUpdateProfileInDTO.getEmail());
-        administrator.setAvatarUrl(administratorUpdateProfileInDTO.getAvatarUrl());
-        administratorService.update(administrator);
-
+    public void updateProdfile(@RequestBody AdministratorUpdateProfileInDTO AdministratorUpdateProfileInDTO){
     }
 
     //拿到重置密码
@@ -89,7 +77,18 @@ public class AdministratorController {
     //创建
     @PostMapping("/crate")
     public Integer crate(@RequestBody AdministratorCrateInDTO administratorCrateInDTO){
-        return null;
+        Administrator administrator = new Administrator();
+        administrator.setUsername(administratorCrateInDTO.getUsername());
+        administrator.setRealName(administratorCrateInDTO.getRealName());
+        administrator.setEmail(administratorCrateInDTO.getEmail());
+        administrator.setAvatarUrl(administratorCrateInDTO.getAvatarUrl());
+        administrator.setStatus((byte) AdministratorStatus.Enable.ordinal());
+        administrator.setCreateTime(new Date());
+
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, administratorCrateInDTO.getPassword().toCharArray());
+        administrator.setEncryptedPassword(bcryptHashString);
+
+        return administratorService.create(administrator);
     }
 
     @PostMapping("/update")

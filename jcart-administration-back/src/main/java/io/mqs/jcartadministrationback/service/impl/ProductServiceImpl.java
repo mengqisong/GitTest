@@ -98,9 +98,6 @@ public class ProductServiceImpl implements ProductService {
         PageHelper.startPage(pageNum,10);
         Page<ProductListOutDTO> page = productMapper.search();
 
-        List<ProductListOutDTO> result = page.getResult();
-        System.out.println(result);
-
         return page;
     }
 

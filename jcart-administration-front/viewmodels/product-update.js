@@ -1,6 +1,7 @@
 var app = new Vue({
     el: '#app',
     data: {
+        productId: '',
         productCode: '',
         productName: '',
         price: '',
@@ -25,15 +26,25 @@ var app = new Vue({
     },
     mounted() {
         console.log('view mounted');
+
         tinymce.init({
             selector: '#mytextarea'
         });
+
+        var url = new URL(location.href);
+        this.productId = url.searchParams.get("productId");
+        if (!this.productId) {
+            alert('productId is null');
+            return;
+        }
+
+        this.getProductById();
     },
     methods: {
-        handleCreateClick() {
-            console.log('create click');
+        handleUpdateClick() {
+            console.log('update click');
             this.description = tinyMCE.activeEditor.getContent();
-            this.createProduct();
+            this.updateProduct();
         },
         handleOnMainChange(val) {
             this.selectedMainPic = val.raw;
@@ -96,9 +107,9 @@ var app = new Vue({
 
 
         },
-        createProduct() {
-            axios.post('/product/create', {
-                productCode: this.productCode,
+        updateProduct() {
+            axios.post('/product/update', {
+                productId: this.productId,
                 productName: this.productName,
                 price: this.price,
                 discount: this.discount,
@@ -113,7 +124,34 @@ var app = new Vue({
             })
                 .then(function (response) {
                     console.log(response);
-                    alert('创建成功');
+                    alert('修改成功');
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        getProductById() {
+            axios.get('/product/getById', {
+                params: {
+                    productId: this.productId
+                }
+            })
+                .then(function (response) {
+                    console.log(response);
+                    var product = response.data;
+                    app.productId = product.productId;
+                    app.productCode = product.productCode;
+                    app.productName = product.productName;
+                    app.price = product.price;
+                    app.discount = product.discount;
+                    app.stockQuantity = product.stockQuantity;
+                    app.selectedStatus = product.status;
+                    app.rewordPoints = product.rewordPoints;
+                    app.sortOrder = product.sortOrder;
+                    app.mainPicUrl = product.mainPicUrl;
+                    app.productAbstract = product.productAbstract;
+                    app.description = product.description;
+                    app.otherPicUrls = product.otherPicUrls;
                 })
                 .catch(function (error) {
                     console.log(error);

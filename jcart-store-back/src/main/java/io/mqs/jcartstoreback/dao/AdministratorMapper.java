@@ -1,9 +1,7 @@
-package io.mqs.jcartadministrationback.dao;
+package io.mqs.jcartstoreback.dao;
 
-import io.mqs.jcartadministrationback.po.Administrator;
-import org.springframework.stereotype.Repository;
+import io.mqs.jcartstoreback.po.Administrator;
 
-@Repository
 public interface AdministratorMapper {
     int deleteByPrimaryKey(Integer administratorId);
 
@@ -16,10 +14,4 @@ public interface AdministratorMapper {
     int updateByPrimaryKeySelective(Administrator record);
 
     int updateByPrimaryKey(Administrator record);
-
-    Administrator selectByUsername(String username);
-
-
-    //new
-    Administrator getByUsername(String username);
 }

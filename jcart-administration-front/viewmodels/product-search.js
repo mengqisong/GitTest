@@ -23,6 +23,7 @@ var app = new Vue({
                 .then(function (response) {
                     console.log(response);
                     app.pageInfo = response.data;
+                    console.log(app.pageInfo.list);
                 })
                 .catch(function (error) {
                     console.log(error);

@@ -1,13 +1,12 @@
 package io.mqs.jcartadministrationback.service;
 
 import io.mqs.jcartadministrationback.po.Administrator;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface AdministratorService {
-
-    Administrator getById(Integer administratorId);
 
     Administrator getByUsername(String username);
 
-    void update(Administrator administrator);
-
+    Integer create(Administrator administrator);
 }
