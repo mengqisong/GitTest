@@ -43,7 +43,7 @@ public class AdministratorController {
 
     @GetMapping("/getProfile")
     public AdministratorGetProfileOutDTO getProfile(@RequestAttribute Integer administratorId){
-         Administrator administrator = administratorService.getProfile(administratorId);
+        Administrator administrator = administratorService.getProfile(administratorId);
 
         AdministratorGetProfileOutDTO administratorGetProfileOutDTO = new AdministratorGetProfileOutDTO();
         administratorGetProfileOutDTO.setAdministratorId(administrator.getAdministratorId());
@@ -58,6 +58,13 @@ public class AdministratorController {
     @PostMapping("/updateProfile")
     public void updateProdfile(@RequestBody AdministratorUpdateProfileInDTO AdministratorUpdateProfileInDTO,
                                @RequestAttribute Integer administratorId){
+        Administrator administrator = new Administrator();
+        administrator.setAdministratorId(administratorId);
+        administrator.setAvatarUrl(AdministratorUpdateProfileInDTO.getAvatarUrl());
+        administrator.setEmail(AdministratorUpdateProfileInDTO.getEmail());
+        administrator.setRealName(AdministratorUpdateProfileInDTO.getRealName());
+
+        administratorService.update(administrator);
     }
 
     @PostMapping("/changepwd")

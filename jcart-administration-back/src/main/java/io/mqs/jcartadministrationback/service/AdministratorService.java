@@ -11,4 +11,6 @@ public interface AdministratorService {
     Integer create(Administrator administrator);
 
     Administrator getProfile(Integer administratorId);
+
+    void update(Administrator administrator);
 }

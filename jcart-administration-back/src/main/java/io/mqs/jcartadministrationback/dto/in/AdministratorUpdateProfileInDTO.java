@@ -1,16 +1,16 @@
 package io.mqs.jcartadministrationback.dto.in;
 
 public class AdministratorUpdateProfileInDTO {
-    private String realname;
+    private String realName;
     private String email;
     private String avatarUrl;
 
-    public String getRealname() {
-        return realname;
+    public String getRealName() {
+        return realName;
     }
 
-    public void setRealname(String realname) {
-        this.realname = realname;
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 
     public String getEmail() {
@@ -28,4 +28,5 @@ public class AdministratorUpdateProfileInDTO {
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
+
 }
