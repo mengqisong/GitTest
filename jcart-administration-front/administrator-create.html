@@ -15,7 +15,14 @@
     <el-input v-model="password" placeholder="请输入密码"></el-input>
     <el-input v-model="email" placeholder="请输入邮箱"></el-input>
     <el-input v-model="realName" placeholder="请输入姓名"></el-input>
-    <el-input v-model="avatarUrl" placeholder="请输入头像"></el-input>
+    <el-upload ref="avatarUrl" action="" :http-request="uploadMainImage" :limit="1" accept="image/*"
+            :auto-upload="false" :on-change="handleOnMainChange" :file-list="mainFileList">
+            <el-button slot="trigger" size="small" type="primary">请选择头像</el-button>
+            <el-button size="small" type="success" @click="handleUploadMainClick">上传</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件</div>
+        </el-upload>
+        上传后主图：<el-link type="primary">{{mainPicUrl}}</el-link>
+
     <el-select v-model="selectStatus" placeholder="请选择状态">
         <el-option
           v-for="item in status"
