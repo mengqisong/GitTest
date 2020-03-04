@@ -1,5 +1,6 @@
 package io.mqs.jcartadministrationback.service;
 
+import io.mqs.jcartadministrationback.dto.out.AdministratorShowOutDTO;
 import io.mqs.jcartadministrationback.po.Administrator;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +14,6 @@ public interface AdministratorService {
     Administrator getProfile(Integer administratorId);
 
     void update(Administrator administrator);
+
+    Administrator getById(Integer administratorId);
 }

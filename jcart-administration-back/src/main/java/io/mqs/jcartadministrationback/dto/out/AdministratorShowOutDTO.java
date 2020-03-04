@@ -3,8 +3,9 @@ package io.mqs.jcartadministrationback.dto.out;
 public class AdministratorShowOutDTO {
     private Integer administratorId;
     private String username;
+    private String realName;
     private String email;
-    private String avatarurl;
+    private String avatarUrl;
     private Byte status;
 
     public Integer getAdministratorId() {
@@ -31,12 +32,12 @@ public class AdministratorShowOutDTO {
         this.email = email;
     }
 
-    public String getAvatarurl() {
-        return avatarurl;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setAvatarurl(String avatarurl) {
-        this.avatarurl = avatarurl;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     public Byte getStatus() {
@@ -45,5 +46,13 @@ public class AdministratorShowOutDTO {
 
     public void setStatus(Byte status) {
         this.status = status;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 }

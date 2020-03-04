@@ -33,5 +33,10 @@ public class AdministratorServiceImpl implements AdministratorService {
         administratorMapper.updateByPrimaryKeySelective(administrator);
     }
 
+    @Override
+    public Administrator getById(Integer administratorId) {
+        return administratorMapper.selectByPrimaryKey(administratorId);
+    }
+
 
 }
