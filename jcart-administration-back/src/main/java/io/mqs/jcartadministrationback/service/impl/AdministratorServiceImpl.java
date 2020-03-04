@@ -7,6 +7,8 @@ import io.mqs.jcartadministrationback.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdministratorServiceImpl implements AdministratorService {
     @Autowired
@@ -36,6 +38,16 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public Administrator getById(Integer administratorId) {
         return administratorMapper.selectByPrimaryKey(administratorId);
+    }
+
+    @Override
+    public void delete(Integer adminstratorId) {
+        administratorMapper.deleteByPrimaryKey(adminstratorId);
+    }
+
+    @Override
+    public void batchDelete(List<Integer> administratorIds) {
+        administratorMapper.batchDelete(administratorIds);
     }
 
 

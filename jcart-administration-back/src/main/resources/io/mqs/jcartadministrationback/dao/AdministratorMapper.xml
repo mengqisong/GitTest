@@ -129,4 +129,14 @@
     where username = #{username,jdbcType=VARCHAR}
   </select>
 
+
+  <delete id="batchDelete">
+    delete from jcart_administrator
+    where administrator_id in
+    <foreach item="item" index="index" collection="administratorIds"
+             open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
 </mapper>

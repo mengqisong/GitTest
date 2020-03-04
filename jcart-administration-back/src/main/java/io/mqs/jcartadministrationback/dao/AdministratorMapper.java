@@ -1,7 +1,10 @@
 package io.mqs.jcartadministrationback.dao;
 
 import io.mqs.jcartadministrationback.po.Administrator;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface AdministratorMapper {
@@ -22,4 +25,6 @@ public interface AdministratorMapper {
 
     //new
     Administrator getByUsername(String username);
+
+    void batchDelete(@Param("administratorIds") List<Integer> administratorIds);
 }

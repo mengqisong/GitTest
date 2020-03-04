@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/administrator")
@@ -133,6 +134,16 @@ public class AdministratorController {
         }
 
         administratorService.update(administrator);
+    }
+
+    @PostMapping("/delete")
+    public void delete(@RequestBody Integer adminstratorId){
+        administratorService.delete(adminstratorId);
+    }
+
+    @PostMapping("/batchDelete")
+    public void batchDelete(@RequestBody List<Integer> administratorIds){
+        administratorService.batchDelete(administratorIds);
     }
 }
 
