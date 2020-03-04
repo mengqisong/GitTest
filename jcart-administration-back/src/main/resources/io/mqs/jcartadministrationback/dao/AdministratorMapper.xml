@@ -139,4 +139,11 @@
     </foreach>
   </delete>
 
+
+  <select id="selectList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from jcart_administrator
+  </select>
+
 </mapper>

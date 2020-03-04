@@ -3,8 +3,9 @@ package io.mqs.jcartadministrationback.dto.out;
 public class AdministratorListOutDTO {
     private Integer administratorId;
     private String username;
+    private String realName;
     private Byte status;
-    private Long ceatetime;
+    private Long createTimestamp;
 
     public Integer getAdministratorId() {
         return administratorId;
@@ -30,11 +31,19 @@ public class AdministratorListOutDTO {
         this.status = status;
     }
 
-    public Long getCeatetime() {
-        return ceatetime;
+    public Long getCreateTimestamp() {
+        return createTimestamp;
     }
 
-    public void setCeatetime(Long ceatetime) {
-        this.ceatetime = ceatetime;
+    public void setCreateTimestamp(Long createTimestamp) {
+        this.createTimestamp = createTimestamp;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
     }
 }

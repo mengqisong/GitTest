@@ -1,5 +1,6 @@
 package io.mqs.jcartadministrationback.service;
 
+import com.github.pagehelper.Page;
 import io.mqs.jcartadministrationback.dto.out.AdministratorShowOutDTO;
 import io.mqs.jcartadministrationback.po.Administrator;
 import org.springframework.stereotype.Repository;
@@ -22,4 +23,6 @@ public interface AdministratorService {
     void delete(Integer adminstratorId);
 
     void batchDelete(List<Integer> administratorIds);
+
+    Page<Administrator> getList(Integer pageNum);
 }
