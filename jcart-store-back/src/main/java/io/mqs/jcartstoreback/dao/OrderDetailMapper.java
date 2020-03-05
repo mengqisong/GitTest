@@ -1,7 +1,9 @@
 package io.mqs.jcartstoreback.dao;
 
 import io.mqs.jcartstoreback.po.OrderDetail;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OrderDetailMapper {
     int deleteByPrimaryKey(Long orderId);
 
