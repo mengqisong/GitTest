@@ -1,6 +1,7 @@
 package io.mqs.jcartadministrationback.controller;
 
 import io.mqs.jcartadministrationback.dto.out.AddressListOutDTO;
+import io.mqs.jcartadministrationback.dto.out.AddressShowOutDTO;
 import io.mqs.jcartadministrationback.po.Address;
 import io.mqs.jcartadministrationback.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,19 @@ public class AddressController {
             addressListOutDTO.setTag(address.getTag());
             return addressListOutDTO;
         }).collect(Collectors.toList());
-        
+
         return addressListOutDTOS;
     };
+
+    @GetMapping("/getById")
+    public AddressShowOutDTO getById(@RequestParam Integer addressId){
+        Address address = addressService.getById(addressId);
+        AddressShowOutDTO addressShowOutDTO = new AddressShowOutDTO();
+        addressShowOutDTO.setAddressId(address.getAddressId());
+        addressShowOutDTO.setReceiverName(address.getReceiverName());
+        addressShowOutDTO.setReceiverMobile(address.getReceiverMobile());
+        addressShowOutDTO.setContent(address.getContent());
+        addressShowOutDTO.setTag(address.getTag());
+        return addressShowOutDTO;
+    }
 }
