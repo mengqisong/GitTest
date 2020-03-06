@@ -1,13 +1,15 @@
 package io.mqs.jcartadministrationback.dto.out;
 
+import java.util.Date;
+
 public class OrderListOutDTO {
     private Long orderId;
     private Integer customerId;
     private String customerName;
     private Byte status;
     private Double totalPrice;
-    private Long createTIme;
-    private Long updateTime;
+    private Date createTime;
+    private Date updateTime;
 
     public Long getOrderId() {
         return orderId;
@@ -49,19 +51,19 @@ public class OrderListOutDTO {
         this.totalPrice = totalPrice;
     }
 
-    public Long getCreateTIme() {
-        return createTIme;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreateTIme(Long createTIme) {
-        this.createTIme = createTIme;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Long getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Long updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 }
