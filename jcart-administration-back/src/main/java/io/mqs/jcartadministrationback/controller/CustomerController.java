@@ -5,7 +5,9 @@ import io.mqs.jcartadministrationback.dto.in.CustomerSearchInDTO;
 import io.mqs.jcartadministrationback.dto.out.CustomerListOutDTO;
 import io.mqs.jcartadministrationback.dto.out.CustomerShowOutDTO;
 import io.mqs.jcartadministrationback.dto.out.PageOutDTO;
+import io.mqs.jcartadministrationback.po.Address;
 import io.mqs.jcartadministrationback.po.Customer;
+import io.mqs.jcartadministrationback.service.AddressService;
 import io.mqs.jcartadministrationback.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,9 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    AddressService addressService;
 
     //查询
     @GetMapping("/search")
@@ -50,7 +55,26 @@ public class CustomerController {
     //回显
     @GetMapping("/show")
     public CustomerShowOutDTO show(@RequestParam Integer customerId){
-        return null;
+        Customer customer = customerService.show(customerId);
+        CustomerShowOutDTO customerShowOutDTO = new CustomerShowOutDTO();
+        customerShowOutDTO.setCustomerId(customerId);
+        customerShowOutDTO.setUsername(customer.getUsername());
+        customerShowOutDTO.setRealNmae(customer.getRealName());
+        customerShowOutDTO.setMobile(customer.getMobile());
+        customerShowOutDTO.setEmail(customer.getEmail());
+        customerShowOutDTO.setAvatarUrl(customer.getAvatarUrl());
+        customerShowOutDTO.setStatus(customer.getStatus());
+        customerShowOutDTO.setRewordPoints(customer.getRewordPoints());
+        customerShowOutDTO.setNewsSubscribed(customer.getNewsSubscribed());
+        customerShowOutDTO.setCreateTime(customer.getCreateTime().getTime());
+        customerShowOutDTO.setDefaultAddressId(customer.getDefaultAddressId());
+
+        Address address = addressService.getById(customer.getDefaultAddressId());
+        if(address!=null){
+            customerShowOutDTO.setDefaultAddress(address.getContent());
+        }
+
+        return customerShowOutDTO;
     }
 
     //更新
