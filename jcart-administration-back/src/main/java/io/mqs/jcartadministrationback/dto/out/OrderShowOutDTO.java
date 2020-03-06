@@ -1,23 +1,27 @@
 package io.mqs.jcartadministrationback.dto.out;
 
+
+import io.mqs.jcartadministrationback.vo.OrderProductVO;
+
 import java.util.List;
 
 public class OrderShowOutDTO {
     private Long orderId;
     private Integer customerId;
+    private String customerName;
     private Byte status;
     private Double totalPrice;
     private Integer rewordPoints;
-    private Long createTime;
-    private String updateTime;
-    private String shipMehood;
+    private Long createTimestamp;
+    private Long updateTimestamp;
+    private Short shipMethod;
     private String shipAddress;
     private Double shipPrice;
     private Short payMethod;
     private String invoiceAddress;
     private Double invoicePrice;
     private String comment;
-    private List<OrderProductShowOutDTO> orderProducts;
+    private List<OrderProductVO> orderProducts;
 
     public Long getOrderId() {
         return orderId;
@@ -59,28 +63,28 @@ public class OrderShowOutDTO {
         this.rewordPoints = rewordPoints;
     }
 
-    public Long getCreateTime() {
-        return createTime;
+    public Long getCreateTimestamp() {
+        return createTimestamp;
     }
 
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
+    public void setCreateTimestamp(Long createTimestamp) {
+        this.createTimestamp = createTimestamp;
     }
 
-    public String getUpdateTime() {
-        return updateTime;
+    public Long getUpdateTimestamp() {
+        return updateTimestamp;
     }
 
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
+    public void setUpdateTimestamp(Long updateTimestamp) {
+        this.updateTimestamp = updateTimestamp;
     }
 
-    public String getShipMehood() {
-        return shipMehood;
+    public Short getShipMethod() {
+        return shipMethod;
     }
 
-    public void setShipMehood(String shipMehood) {
-        this.shipMehood = shipMehood;
+    public void setShipMethod(Short shipMethod) {
+        this.shipMethod = shipMethod;
     }
 
     public String getShipAddress() {
@@ -131,11 +135,19 @@ public class OrderShowOutDTO {
         this.comment = comment;
     }
 
-    public List<OrderProductShowOutDTO> getOrderProducts() {
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public List<OrderProductVO> getOrderProducts() {
         return orderProducts;
     }
 
-    public void setOrderProducts(List<OrderProductShowOutDTO> orderProducts) {
+    public void setOrderProducts(List<OrderProductVO> orderProducts) {
         this.orderProducts = orderProducts;
     }
 }

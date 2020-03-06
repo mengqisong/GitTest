@@ -1,7 +1,9 @@
 package io.mqs.jcartadministrationback.dao;
 
 import io.mqs.jcartadministrationback.po.Customer;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CustomerMapper {
     int deleteByPrimaryKey(Integer customerId);
 
