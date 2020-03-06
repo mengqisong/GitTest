@@ -3,6 +3,7 @@ package io.mqs.jcartadministrationback.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import io.mqs.jcartadministrationback.dao.CustomerMapper;
+import io.mqs.jcartadministrationback.dto.in.CustomerSetStatusInDTO;
 import io.mqs.jcartadministrationback.dto.out.CustomerShowOutDTO;
 import io.mqs.jcartadministrationback.po.Customer;
 import io.mqs.jcartadministrationback.service.CustomerService;
@@ -23,5 +24,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer show(Integer customerId) {
         return customerMapper.selectByPrimaryKey(customerId);
+    }
+
+    @Override
+    public void setStatus(CustomerSetStatusInDTO customerSetStatusInDTO) {
+        Customer customer = new Customer();
+        customer.setCustomerId(customerSetStatusInDTO.getCustomerId());
+        customer.setStatus(customerSetStatusInDTO.getStatus());
+        customerMapper.updateByPrimaryKeySelective(customer);
     }
 }

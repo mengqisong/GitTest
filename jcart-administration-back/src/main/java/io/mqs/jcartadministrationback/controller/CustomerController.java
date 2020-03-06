@@ -2,6 +2,7 @@ package io.mqs.jcartadministrationback.controller;
 
 import com.github.pagehelper.Page;
 import io.mqs.jcartadministrationback.dto.in.CustomerSearchInDTO;
+import io.mqs.jcartadministrationback.dto.in.CustomerSetStatusInDTO;
 import io.mqs.jcartadministrationback.dto.out.CustomerListOutDTO;
 import io.mqs.jcartadministrationback.dto.out.CustomerShowOutDTO;
 import io.mqs.jcartadministrationback.dto.out.PageOutDTO;
@@ -80,5 +81,10 @@ public class CustomerController {
     //更新
     @PostMapping("/disable")
     public void disable(@RequestParam Integer customerId){
+    }
+
+    @PostMapping("/setStatus")
+    public void setStatus(@RequestBody CustomerSetStatusInDTO customerSetStatusInDTO){
+        customerService.setStatus(customerSetStatusInDTO);
     }
 }
