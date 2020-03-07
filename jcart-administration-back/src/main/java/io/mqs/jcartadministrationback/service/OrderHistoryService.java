@@ -8,4 +8,6 @@ import java.util.List;
 @Repository
 public interface OrderHistoryService {
     List<OrderHistory> getListByOrderId(Long orderHistoryId);
+
+    Long create(OrderHistory orderHistory);
 }
