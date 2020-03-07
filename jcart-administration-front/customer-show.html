@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/elementui.css">
+    <title>Demo</title>
+</head>
+
+<body>
+<div id="app">
+    客户用户名:<el-input v-model="username" placeholder="请输入内容"></el-input>
+    客户姓名:<el-input v-model="realName" placeholder="请输入内容"></el-input>
+    客户头像:<el-input v-model="avatarUrl" placeholder="请输入内容"></el-input>
+    手机:<el-input v-model="mobile" placeholder="请输入内容"></el-input>
+    邮箱:<el-input v-model="email" placeholder="请输入内容"></el-input>
+    状态:<el-input v-model="status" placeholder="请输入内容"></el-input>
+    注册时间:<el-input v-model="createTimestamp" placeholder="请输入内容"></el-input>
+    订阅新闻:<el-input v-model="newsSubscribed" placeholder="请输入内容"></el-input>
+    积分:<el-input v-model="rewordPoints" placeholder="请输入内容"></el-input>
+    默认地址:<el-input v-model="defaultAddress" placeholder="请输入内容"></el-input>
+</div>
+
+<script src="assets/js/axios.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/vue.js"></script>
+<script src="assets/js/elementui.js"></script>
+<script src="viewmodels/customer-show.js"></script>
+
+</body>
+
+</html>
