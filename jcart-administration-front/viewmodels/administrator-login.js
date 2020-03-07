@@ -25,6 +25,7 @@ var app = new Vue({
               })
               .catch(function (error) {
                 console.log(error);
+                alert("账号密码错误");
               })
               .then(function () {
                 // always executed
