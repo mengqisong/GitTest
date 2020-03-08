@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/elementui.css">
+    <title>Demo</title>
+</head>
+
+<body>
+<div id="app">
+    <el-divider>退货基本信息</el-divider>
+    退货Id：<el-input v-model="returnId" placeholder="请输入内容"></el-input>
+    订单Id：<el-input v-model="orderId" placeholder="请输入内容"></el-input>
+    订单时间： <el-input v-model="orderTimestamp" placeholder="请输入内容"></el-input>
+    客户姓名：<el-input v-model="customerName" placeholder="请输入内容"></el-input>
+    手机：<el-input v-model="mobile" placeholder="请输入内容"></el-input>
+    邮箱：<el-input v-model="email" placeholder="请输入内容"></el-input>
+    状态：<el-input v-model="status" placeholder="请输入内容"></el-input>
+    处理方式：<el-input v-model="action" placeholder="请输入内容"></el-input>
+    <br><br><br>
+    <el-divider>退货商品信息</el-divider>
+    商品代号：<el-input v-model="returnId" placeholder="请输入内容"></el-input>
+    商品名称：<el-input v-model="orderId" placeholder="请输入内容"></el-input>
+    数量： <el-input v-model="orderTimestamp" placeholder="请输入内容"></el-input>
+    退货原因：<el-input v-model="customerName" placeholder="请输入内容"></el-input>
+    是否开封：<el-input v-model="mobile" placeholder="请输入内容"></el-input>
+    备注：<el-input v-model="email" placeholder="请输入内容"></el-input>
+    申请时间：<el-input v-model="status" placeholder="请输入内容"></el-input>
+    更新时间：<el-input v-model="action" placeholder="请输入内容"></el-input>
+    <br><br><br>
+    <el-divider>退货历史</el-divider>
+        <el-table :data="returnHistories" style="width: 100%">
+            <el-table-column prop="timestamp" label="时间">
+            </el-table-column>
+            <el-table-column prop="returnStatus" label="退货状态">
+            </el-table-column>
+            <el-table-column prop="comment" label="备注">
+            </el-table-column>
+        </el-table>
+
+</div>
+
+<script src="assets/js/axios.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/vue.js"></script>
+<script src="assets/js/elementui.js"></script>
+<script src="viewmodels/return-show.js"></script>
+
+</body>
+
+</html>
