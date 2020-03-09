@@ -200,8 +200,39 @@ public class AdministratorController {
         mailMessage.setSubject("密码重置");
         mailMessage.setText(hex);
         mailSender.send(mailMessage);
-
+        //todo send messasge to MQ
         emailPwdResetCodeMap.put(email,hex);
     }
+
+    @PostMapping("/resetPwd")
+    public void resetPwd(@RequestBody AdministratorResetPwdInDTO administratorResetPwdInDTO) throws ClientException {
+        String email = administratorResetPwdInDTO.getEmail();
+        if (email == null) {
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
+        }
+        String innerResetCode = emailPwdResetCodeMap.get(email);
+        String resetCode = administratorResetPwdInDTO.getResetCode();
+        if (innerResetCode == null) {
+            return;
+        }
+        if (!innerResetCode.equalsIgnoreCase(resetCode)) {
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_RESETCODE_INVALID_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PWDRESET_RESETCODE_INVALID_ERRMSG);
+        }
+        Administrator administrator = administratorService.getByEmail(email);
+        if (administrator == null) {
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
+        }
+        String newPwd = administratorResetPwdInDTO.getNewPwd();
+        if(newPwd == null){
+            return;
+        }
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, newPwd.toCharArray());
+        administrator.setEncryptedPassword(bcryptHashString);
+        administratorService.update(administrator);
+
+        emailPwdResetCodeMap.remove(email);
+
+    }
 }
+
 
