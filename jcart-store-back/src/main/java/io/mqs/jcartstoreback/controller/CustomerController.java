@@ -6,6 +6,7 @@ import io.mqs.jcartstoreback.dto.in.*;
 import io.mqs.jcartstoreback.dto.out.CustomerGetProfileOutDTO;
 import io.mqs.jcartstoreback.dto.out.CustomerLoginOutDTO;
 import io.mqs.jcartstoreback.exception.ClientException;
+import io.mqs.jcartstoreback.po.Administrator;
 import io.mqs.jcartstoreback.po.Customer;
 import io.mqs.jcartstoreback.service.CustomerService;
 import io.mqs.jcartstoreback.util.JWTUtil;
@@ -107,7 +108,7 @@ public class CustomerController {
 
     }
 
-   /* @GetMapping("/getPwdResetCode")
+   @GetMapping("/getPwdResetCode")
     public void getPwdResetCode(@RequestParam String email) throws ClientException {
         Customer customer = customerService.getByEmail(email);
         if (customer == null){
@@ -122,11 +123,35 @@ public class CustomerController {
         message.setText(hex);
         mailSender.send(message);
         emailPwdResetCodeMap.put("PwdResetCode"+email, hex);
-    }*/
+    }
 
     @PostMapping("/resetPwd")
-    public void resetPwd(@RequestBody CustomerResetPwdInDTO customerResetPwdInDTO){
+    public void resetPwd(@RequestBody CustomerResetPwdInDTO customerResetPwdInDTO) throws ClientException {
+        String email = customerResetPwdInDTO.getEmail();
+        if (email == null) {
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
+        }
+        String innerResetCode = emailPwdResetCodeMap.get(email);
+        String resetCode = customerResetPwdInDTO.getResetCode();
+        if (innerResetCode == null) {
+            return;
+        }
+        if (!innerResetCode.equalsIgnoreCase(resetCode)) {
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_RESETCODE_INVALID_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PWDRESET_RESETCODE_INVALID_ERRMSG);
+        }
+        Customer customer = customerService.getByEmail(email);
+        if (customer == null) {
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
+        }
+        String newPwd = customerResetPwdInDTO.getNewPwd();
+        if(newPwd == null){
+            return;
+        }
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, newPwd.toCharArray());
+        customer.setEncryptedPassword(bcryptHashString);
+        customerService.update(customer);
 
+        emailPwdResetCodeMap.remove(email);
     }
 
 

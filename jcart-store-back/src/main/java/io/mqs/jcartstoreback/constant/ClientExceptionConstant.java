@@ -14,5 +14,12 @@ public class ClientExceptionConstant {
     public static final String CUSTOMER_PASSWORD_INVALID_ERRCODE = "0102";
     public static final String CUSTOMER_PASSWORD_INVALID_ERRMSG = "customer password invalid";
 
+    public static final String ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE = "0107";
+    public static final String ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG = "administrator email not exist";
+
+    public static final String ADMINISTRATOR_PWDRESET_RESETCODE_INVALID_ERRCODE = "0106";
+    public static final String ADMINISTRATOR_PWDRESET_RESETCODE_INVALID_ERRMSG = "administrator password reset code invalid";
+
+
 
 }
