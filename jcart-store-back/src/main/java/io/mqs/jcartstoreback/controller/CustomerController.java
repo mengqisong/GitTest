@@ -122,7 +122,7 @@ public class CustomerController {
         message.setSubject("jcart重置密码");
         message.setText(hex);
         mailSender.send(message);
-        emailPwdResetCodeMap.put("PwdResetCode"+email, hex);
+        emailPwdResetCodeMap.put(email, hex);
     }
 
     @PostMapping("/resetPwd")
