@@ -146,4 +146,11 @@
     from jcart_administrator
   </select>
 
+  <select id="getByEmail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from jcart_administrator
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

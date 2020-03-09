@@ -11,10 +11,17 @@ import io.mqs.jcartadministrationback.po.Administrator;
 import io.mqs.jcartadministrationback.service.AdministratorService;
 import io.mqs.jcartadministrationback.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.DatatypeConverter;
+import java.security.SecureRandom;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,6 +34,17 @@ public class AdministratorController {
 
     @Autowired
     private JWTUtil jwtUtil;
+
+    @Autowired
+    SecureRandom secureRandom;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Value("${spring.mail.username}")
+    private String fromEmail;
+
+    private Map<String, String> emailPwdResetCodeMap = new HashMap<>();
 
     @GetMapping("/login")
     public AdministratorLoginOutDTO login(AdministratorLoginInDTO administratorLoginInDTO) throws ClientException {
@@ -164,6 +182,25 @@ public class AdministratorController {
     @PostMapping("/batchDelete")
     public void batchDelete(@RequestBody List<Integer> administratorIds){
         administratorService.batchDelete(administratorIds);
+    }
+
+    @GetMapping("/getPwdResetCode")
+    public void getPwdResetCode(@RequestParam String email) throws ClientException {
+        Administrator administrator = administratorService.getByEmail(email);
+        if (administrator == null){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
+        }
+
+        byte[] bytes = secureRandom.generateSeed(3);
+        String hex = DatatypeConverter.printHexBinary(bytes);
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom(fromEmail);
+        mailMessage.setTo(email);
+        mailMessage.setSubject("密码重置");
+        mailMessage.setText(hex);
+
+        emailPwdResetCodeMap.put(email,hex);
     }
 }
 

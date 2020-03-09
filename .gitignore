@@ -1,0 +1,9 @@
+.idea/$CACHE_FILE$
+.idea/$PRODUCT_WORKSPACE_FILE$
+.idea/encodings.xml
+.idea/GitTest.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+jcart-administration-back/src/main/java/io/mqs/jcartadministrationback/bean/BeanConfig.java
