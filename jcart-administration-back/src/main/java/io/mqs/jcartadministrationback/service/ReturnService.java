@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReturnService {
     Page<Return> search(Integer pageNum);
+
+    Return getById(Integer returnId);
 }

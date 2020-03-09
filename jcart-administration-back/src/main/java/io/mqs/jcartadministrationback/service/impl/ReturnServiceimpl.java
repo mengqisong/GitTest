@@ -18,4 +18,9 @@ public class ReturnServiceimpl implements ReturnService {
         PageHelper.startPage(pageNum,10);
         return returnMapper.search();
     }
+
+    @Override
+    public Return getById(Integer returnId) {
+        return returnMapper.selectByPrimaryKey(returnId);
+    }
 }
