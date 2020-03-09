@@ -199,6 +199,7 @@ public class AdministratorController {
         mailMessage.setTo(email);
         mailMessage.setSubject("密码重置");
         mailMessage.setText(hex);
+        mailSender.send(mailMessage);
 
         emailPwdResetCodeMap.put(email,hex);
     }
