@@ -182,6 +182,23 @@
 
   <select id="search" resultMap="ProductListOutDTO">
    select * from jcart_product
+   <where>
+     <if test="productCode != null and productCode != '' ">
+       product_code = #{productCode}
+     </if>
+     <if test="status != null">
+       AND status = #{status}
+     </if>
+     <if test="stockQuantity != null">
+       AND stock_quantity &lt;= #{stockQuantity}
+     </if>
+     <if test="price != null">
+       AND price = #{price}
+     </if>
+     <if test="productName != null and productName != ''">
+       AND product_name like concat('%',#{productName},'%')
+     </if>
+   </where>
   </select>
 
 </mapper>

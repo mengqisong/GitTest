@@ -2,6 +2,7 @@ package io.mqs.jcartadministrationback.service;
 
 import com.github.pagehelper.Page;
 import io.mqs.jcartadministrationback.dto.in.ProductCreateInDTO;
+import io.mqs.jcartadministrationback.dto.in.ProductSearchInDTO;
 import io.mqs.jcartadministrationback.dto.in.ProductUpdateInDTO;
 import io.mqs.jcartadministrationback.dto.out.PageOutDTO;
 import io.mqs.jcartadministrationback.dto.out.ProductListOutDTO;
@@ -19,7 +20,7 @@ public interface ProductService {
 
     void forDelete(@Param("productIds") List<Integer> productIds);
 
-    Page<ProductListOutDTO> search(Integer pageNum);
+    Page<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,Integer pageNum);
 
     ProductShowOutDTO getById(Integer productId);
 }
