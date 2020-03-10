@@ -15,14 +15,15 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/orderhistory")
+@CrossOrigin
 public class OrderHistoryController {
 
     @Autowired
     OrderHistoryService orderHistoryService;
 
     @GetMapping("/getListByOrderId")
-    public List<OrderHistoryListOutDTO> getListByOrderId(@RequestParam Long orderHistoryId){
-        List<OrderHistory> orderHistories = orderHistoryService.getListByOrderId(orderHistoryId);
+    public List<OrderHistoryListOutDTO> getListByOrderId(@RequestParam Long orderId){
+        List<OrderHistory> orderHistories = orderHistoryService.getListByOrderId(orderId);
 
         List<OrderHistoryListOutDTO> orderHistoryListOutDTOS = orderHistories.stream().map(orderHistory -> {
             OrderHistoryListOutDTO orderHistoryListOutDTO = new OrderHistoryListOutDTO();

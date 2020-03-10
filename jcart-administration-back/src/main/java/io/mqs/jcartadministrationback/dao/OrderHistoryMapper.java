@@ -19,5 +19,5 @@ public interface OrderHistoryMapper {
 
     int updateByPrimaryKey(OrderHistory record);
 
-    List<OrderHistory> selectByOrderId(Long orderHistoryId);
+    List<OrderHistory> selectByOrderId(Long orderId);
 }

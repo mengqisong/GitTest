@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface OrderHistoryService {
-    List<OrderHistory> getListByOrderId(Long orderHistoryId);
+    List<OrderHistory> getListByOrderId(Long orderId);
 
     Long create(OrderHistory orderHistory);
 }

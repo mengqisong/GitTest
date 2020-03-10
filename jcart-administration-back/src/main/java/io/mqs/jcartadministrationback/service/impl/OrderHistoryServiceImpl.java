@@ -21,8 +21,8 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
     OrderMapper orderMapper;
 
     @Override
-    public List<OrderHistory> getListByOrderId(Long orderHistoryId) {
-        return orderHistoryMapper.selectByOrderId(orderHistoryId);
+    public List<OrderHistory> getListByOrderId(Long orderId) {
+        return orderHistoryMapper.selectByOrderId(orderId);
     }
 
     @Override
