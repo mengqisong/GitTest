@@ -2,7 +2,10 @@ package io.mqs.jcartadministrationback.dao;
 
 import com.github.pagehelper.Page;
 import io.mqs.jcartadministrationback.po.Return;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
 
 @Repository
 public interface ReturnMapper {
@@ -18,5 +21,12 @@ public interface ReturnMapper {
 
     int updateByPrimaryKey(Return record);
 
-    Page<Return> search();
+    Page<Return> search(@Param("returnId") Integer returnId,
+                        @Param("orderId") Long orderId,
+                        @Param("startTime") Date startTime,
+                        @Param("endTime") Date endTime,
+                        @Param("status") Byte status,
+                        @Param("productCode") String productCode,
+                        @Param("customerName") String customerName,
+                        @Param("productName") String productName);
 }
