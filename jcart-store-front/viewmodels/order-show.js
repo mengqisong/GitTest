@@ -15,7 +15,10 @@ var app = new Vue({
         invoicePrice: '',
         comment: '',
         orderProducts: [],
-        orderHistories: []
+        orderHistories: [],
+        statuses: ['待处理','处理中','待发货','已发货','待签收' ,'已签收' ,'待支付' ,'已支付' ,'取消' ,'拒绝' ,'完成' ,'待评价' , '已评价' ],
+        shipMethods: ['EMS' ,'顺丰' ,'圆通','中通','申通' ],
+        payMethods: ['货到付款' ,'借记卡' ,'信用卡' ,'微信支付' ,'支付宝' ]
     },
     mounted() {
         console.log('view mounted');
