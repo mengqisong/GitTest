@@ -12,7 +12,8 @@ var app = new Vue({
         newsSubscribed: '',
         rewordPoints: '',
         defaultAddressId: '',
-        defaultAddress: ''
+        defaultAddress: '',
+        statuses: ['禁用','启用','不安全']
     },
     mounted(){
         console.log("view mounted")
