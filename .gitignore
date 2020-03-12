@@ -7,3 +7,19 @@
 .idea/vcs.xml
 .idea/workspace.xml
 jcart-administration-back/src/main/java/io/mqs/jcartadministrationback/bean/BeanConfig.java
+jcart-administration-front/viewmodels/demo.js
+jcart-administration-front/viewmodels copy/administrator-create.js
+jcart-administration-front/viewmodels copy/administrator-index.js
+jcart-administration-front/viewmodels copy/administrator-login.js
+jcart-administration-front/viewmodels copy/administrator-update.js
+jcart-administration-front/viewmodels copy/administrator-update-profile.js
+jcart-administration-front/viewmodels copy/customer-search.js
+jcart-administration-front/viewmodels copy/customer-show.js
+jcart-administration-front/viewmodels copy/demo copy.js
+jcart-administration-front/viewmodels copy/order-search.js
+jcart-administration-front/viewmodels copy/order-show.js
+jcart-administration-front/viewmodels copy/product-create.js
+jcart-administration-front/viewmodels copy/product-search.js
+jcart-administration-front/viewmodels copy/product-update.js
+jcart-administration-front/viewmodels copy/returnhistory-index.js
+jcart-administration-front/viewmodels copy/return-search.js
