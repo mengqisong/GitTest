@@ -2,6 +2,7 @@ package io.mqs.jcartadministrationback.controller;
 
 import io.mqs.jcartadministrationback.constant.ClientExceptionConstant;
 import io.mqs.jcartadministrationback.exception.ClientException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +16,10 @@ import java.util.UUID;
 @RequestMapping("/image")
 @CrossOrigin
 public class ImageController {
+
+    @Value("${www.image.baseurl}")
+    private String imageBaseurl;
+
     private List<String> imageExts= Arrays.asList("jpg","jpeg","png");
 
     @PostMapping("/upload")
@@ -35,6 +40,6 @@ public class ImageController {
             byte[] data = image.getBytes();
             out.write(data);
         }
-        return filename;
+        return imageBaseurl+"/"+filename;
     }
 }
