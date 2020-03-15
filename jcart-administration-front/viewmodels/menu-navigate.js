@@ -1,4 +1,5 @@
 var app = new Vue({
+    router :  router,
     el: '#app',
     data: {
         jcProductId:'',
@@ -13,7 +14,10 @@ var app = new Vue({
         },
         handleMenuItemClick(val){
             console.log('menu item click', val.index);
-            this.selectMainPage = val.index;
+            switch(val.index){
+                case '1-1':
+                    this.$router.push("product/search");break;
+            }
         }
     }
 

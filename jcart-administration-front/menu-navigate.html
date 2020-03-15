@@ -48,9 +48,10 @@
             </el-submenu>
           </el-aside>
           <el-main>
-            <jc-product-search-page v-if="selectMainPage == '1-1'"></jc-product-search-page>
+            <!-- <jc-product-search-page v-if="selectMainPage == '1-1'"></jc-product-search-page>
             <jc-customer-search-page v-if="selectMainPage == '3-1'"></jc-customer-search-page>
-            <jc-product-update-page v-if="selectMainPage == '1-6'"></jc-product-update-page>
+            <jc-product-update-page v-if="selectMainPage == '1-6'"></jc-product-update-page> -->
+            <router-view></router-view>
           </el-main>
         </el-container>
       </el-container>
@@ -61,14 +62,20 @@
 <script src="assets/js/common.js"></script>
 <script src="assets/js/vue.js"></script>
 <script src="assets/js/elementui.js"></script>
+<script src="assets/js/vue-router.js"></script>
 
-<script src="viewmodels/menu-navigate.js"></script>
-
-<script src="route-page/customer-search-route-page.js"></script>
+<!-- <script src="route-page/customer-search-route-page.js"></script>
 <script src="route-page/order-search-route-page.js"></script>
 <script src="route-page/product-search-route-page.js"></script>
 <script src="route-page/product-update-page.js"></script>
-<script src="route-page/return-search-route-page.js"></script>
+<script src="route-page/return-search-route-page.js"></script> -->
+
+<script src="route-page/product-search-route-page.js"></script>
+
+
+<script src="route-page/router.js"></script>
+
+<script src="viewmodels/menu-navigate.js"></script>
 
 </body>
 
