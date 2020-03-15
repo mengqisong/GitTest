@@ -1,5 +1,5 @@
-const ProductUpdateRoutePage = {
-    template: `
+Vue.component('jc-product-update-page',{
+    template:`
     <div id="app">
 
         <el-page-header @back="handleGoBack" content="商品编辑">
@@ -49,7 +49,6 @@ const ProductUpdateRoutePage = {
         <br>
 
         <el-button type="primary" @click="handleUpdateClick">更新</el-button>
-
     </div>
     `,
     data() {
@@ -81,7 +80,8 @@ const ProductUpdateRoutePage = {
     mounted() {
         console.log('view mounted');
 
-        this.productId = this.$route.params.productId;
+        this.productId = app.jcProductId
+
         if (!this.productId) {
             alert('productId is null');
             return;
@@ -92,7 +92,7 @@ const ProductUpdateRoutePage = {
     methods: {
         handleGoBack() {
             console.log('go back click');
-            this.$router.go(-1);
+            app.selectMainPage = '1-1'
         },
         handleUpdateClick() {
             console.log('update click');
@@ -214,4 +214,4 @@ const ProductUpdateRoutePage = {
                 });
         }
     }
-}
+})

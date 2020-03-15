@@ -12,10 +12,11 @@
 <body>
 <div id="app">
     <el-container>
-        <el-header>Jcart电商系统</el-header>
+        <el-container>
+          <el-header>Jcart电商系统</el-header>
         <el-container>
           <el-aside width="200px">
-            <el-menu  background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+                <el-menu background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
             <el-submenu index="1">
             <template slot="title">
                 <i class="el-icon-goods"></i>
@@ -48,24 +49,25 @@
           </el-aside>
           <el-main>
             <jc-product-search-page v-if="selectMainPage == '1-1'"></jc-product-search-page>
-            <jc-customer-search-page v-if="selectMainPage == '2-1'"></jc-customer-search-page>
-            <jc-customer-search-page v-if="selectMainPage == '4-1'"></jc-customer-search-page>
+            <jc-customer-search-page v-if="selectMainPage == '3-1'"></jc-customer-search-page>
+            <jc-product-update-page v-if="selectMainPage == '1-6'"></jc-product-update-page>
           </el-main>
         </el-container>
       </el-container>
 </div>
 
+<script src="assets/vendor/tinymce/tinymce.min.js"></script>
 <script src="assets/js/axios.min.js"></script>
 <script src="assets/js/common.js"></script>
 <script src="assets/js/vue.js"></script>
 <script src="assets/js/elementui.js"></script>
+
 <script src="viewmodels/menu-navigate.js"></script>
 
-<script src="route-page/administrator-index-route-page.js"></script>
 <script src="route-page/customer-search-route-page.js"></script>
 <script src="route-page/order-search-route-page.js"></script>
 <script src="route-page/product-search-route-page.js"></script>
-<script src="route-page/product-update-route-page.js"></script>
+<script src="route-page/product-update-page.js"></script>
 <script src="route-page/return-search-route-page.js"></script>
 
 </body>
