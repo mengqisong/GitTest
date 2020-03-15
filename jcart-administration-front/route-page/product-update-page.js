@@ -2,8 +2,7 @@ const ProductUpdateRoutePage = {
     template:`
     <div id="app">
 
-        <el-page-header @back="handleGoBack" content="商品编辑">
-        </el-page-header>
+        <el-button type="primary" @click="handleGoBack">返回</el-button>
         <br>
 
         <el-input v-model="productCode" placeholder="请输入商品代码" readonly></el-input>
@@ -47,7 +46,6 @@ const ProductUpdateRoutePage = {
         </div>
         <br>
         <br>
-
         <el-button type="primary" @click="handleUpdateClick">更新</el-button>
     </div>
     `,
@@ -80,8 +78,7 @@ const ProductUpdateRoutePage = {
     mounted() {
         console.log('view mounted');
 
-        this.productId = app.jcProductId
-
+        this.productId = app.jcProduct;
         if (!this.productId) {
             alert('productId is null');
             return;
@@ -92,7 +89,7 @@ const ProductUpdateRoutePage = {
     methods: {
         handleGoBack() {
             console.log('go back click');
-            app.selectMainPage = '1-1'
+            this.$router.back();
         },
         handleUpdateClick() {
             console.log('update click');

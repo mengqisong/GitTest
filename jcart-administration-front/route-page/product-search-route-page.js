@@ -1,18 +1,23 @@
 const ProductSearchRoutePage = {
     template: `
     <div id="app">
+        <el-button type="primary" @click="handleCreateClick">添加商品</el-button>
+        <br><br>
+
         <el-input v-model="productCode" placeholder="请输入商品代号"></el-input>
         <el-input v-model="productName" placeholder="请输入商品名称"></el-input>
         <el-input v-model="price" placeholder="请输入价格"></el-input>
         <el-input v-model="stockQuantity" placeholder="请输入库存"></el-input>
         <br>
+
         <el-select v-model="selectedStatus" placeholder="请选择状态">
             <el-option v-for="item in statuses" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
-        </el-select>
+        </el-select>f
         <br>
         <el-button type="primary" @click="handleSearchClick">搜索</el-button>
         <el-button type="primary" @click="handleClearClick">清空条件</el-button>
+
         <el-table :data="pageInfo.list" style="width: 100%">
             <el-table-column label="主图">
                 <template slot-scope="scope">
@@ -43,8 +48,8 @@ const ProductSearchRoutePage = {
                     <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                 </template>
             </el-table-column>
-
         </el-table>
+
         <el-pagination layout="prev, pager, next" :total="pageInfo.total" @current-change="handlePageChange">
         </el-pagination>
     </div>
@@ -70,15 +75,18 @@ const ProductSearchRoutePage = {
         this.searchProduct();
     },
     methods: {
-        handleEdit(index,row){
-            console.log("product edit click",index, row)
-            app.jcProductId = row.productId;
-            app.selectMainPage = '1-6';
+        handleCreateClick(){
+            this.$router.push('/product/create');
         },
         handleSearchClick() {
             console.log('search click');
             this.pageNum = 1;
             this.searchProduct();
+        },
+        handleEdit(index, row) {
+            console.log('product edit click', index, row);
+            app.jcProduct = row.productId;
+            this.$router.push('/product/update/');
         },
         handleClearClick() {
             console.log('clear click');
