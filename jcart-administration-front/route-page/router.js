@@ -3,6 +3,7 @@ const routes = [
     { path: '/customer/search', component: CustomerSearchRoutePage },
     { path: '/order/search', component: OrderSearchRoutePage },
     { path: '/return/search', component: ReturnSearchRoutePage },
+    { path: '/product/update', component: ProductUpdateRoutePage },
     
     
 ];
