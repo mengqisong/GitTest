@@ -84,7 +84,7 @@ const ProductSearchRoutePage = {
             this.searchProduct();
         },
         handleEdit(index, row) {
-            console.log('product edit click', index, row);
+            console.log('product edit click', index, row.productId);
             app.jcProduct = row.productId;
             this.$router.push('/product/update/');
         },

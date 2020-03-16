@@ -78,7 +78,7 @@ const ProductUpdateRoutePage = {
     mounted() {
         console.log('view mounted');
 
-        this.productId = this.$route.params.productId;
+        this.productId = app.jcProduct;
         if (!this.productId) {
             alert('productId is null');
             return;
