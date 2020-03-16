@@ -4,7 +4,8 @@ const routes = [
     { path: '/order/search', component: OrderSearchRoutePage },
     { path: '/return/search', component: ReturnSearchRoutePage },
     { path: '/product/update', component: ProductUpdateRoutePage },
-    
+    { path: '/administrator/index', component: AdministratorIndexRoutePage },
+
     
 ];
 
