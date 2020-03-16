@@ -38,14 +38,19 @@ const OrderSearchRoutePage = {
                     {{scope.row.totalPrice.toFixed(2)}}
                 </template>
             </el-table-column>
-            <el-table-column prop="createTimestamp" label="下单时间">
+            <el-table-column prop="createTime" label="下单时间">
                 <template slot-scope="scope">
-                    {{(new Date(scope.row.createTimestamp)).toLocaleString()}}
+                    {{(new Date(scope.row.createTime)).toLocaleString()}}
                 </template>
             </el-table-column>
-            <el-table-column prop="updateTimestamp" label="修改时间">
+            <el-table-column prop="updateTime" label="修改时间">
                 <template slot-scope="scope">
-                    {{(new Date(scope.row.updateTimestamp)).toLocaleString()}}
+                    {{(new Date(scope.row.updateTime)).toLocaleString()}}
+                </template>
+            </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button size="mini" type="primary" @click="handleShowClick(scope.$index, scope.row)">详情</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -86,6 +91,9 @@ const OrderSearchRoutePage = {
         this.searchOrder();
     },
     methods: {
+        handleShowClick(index, row) {
+            this.$router.push('/order/show/' + row.orderId);
+        },
         handleSearchClick() {
             console.log('search click');
             this.pageNum = 1;
@@ -112,8 +120,8 @@ const OrderSearchRoutePage = {
                     customerName: this.customerName,
                     status: this.selectedStatus,
                     totalPrice: this.totalPrice,
-                    startTimestamp: this.startTime ? this.startTime.getTime() : '',
-                    endTimestamp: this.endTime ? this.endTime.getTime() : '',
+                    startTime: this.startTime ? this.startTime.getTime() : '',
+                    endTime: this.endTime ? this.endTime.getTime() : '',
                     pageNum: this.pageNum
                 }
             })
