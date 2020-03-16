@@ -62,7 +62,9 @@ const AdministratorIndexRoutePage = {
             this.$router.push('/administrator/create');
         },
         handleEdit(index, row) {
-            this.$router.push('/administrator/update/' + row.administratorId);
+            console.log(row.administratorId);
+            app.jcadministrator = row.administratorId;
+            this.$router.push('/administrator/updateprofile');
         },
         handleDelete(index, row) {
             console.log('delete click');

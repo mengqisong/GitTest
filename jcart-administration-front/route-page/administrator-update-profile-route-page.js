@@ -1,6 +1,8 @@
 const AdministratorUpdateProfileRoutePage = {
     template: `
     <div id="app">
+    <el-button type="primary" @click="handleGoBack">返回</el-button>
+        <br>
         用户名：{{username}} <br>
         姓名：<el-input v-model="realName" placeholder="请输入姓名"></el-input>
         邮箱：<el-input v-model="email" placeholder="请输入邮箱"></el-input>
@@ -22,15 +24,28 @@ const AdministratorUpdateProfileRoutePage = {
     },
     mounted() {
         console.log('view mounted');
+        this.administratorId = app.jcadministrator;
+        if(this.administratorId == null){
+            alert("administrator is null");
+            return;
+        }
         this.getMyProfile();
     },
     methods: {
+        handleGoBack() {
+            console.log('go back click');
+            this.$router.back();
+        },
         handleUpdateClick() {
             console.log('update click');
             this.updateMyProfile();
         },
         getMyProfile() {
-            axios.get('/administrator/getProfile')
+            axios.get('/administrator/getProfile',{
+                params: {
+                    administratorId: this.administratorId
+                }
+            })
                 .then((response) => {
                     console.log(response);
                     var me = response.data;

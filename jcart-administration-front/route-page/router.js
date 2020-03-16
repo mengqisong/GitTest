@@ -5,7 +5,7 @@ const routes = [
 
     { path: '/administrator/index', component: AdministratorIndexRoutePage },
     { path: '/administrator/updateprofile', component: AdministratorUpdateProfileRoutePage },
-
+    { path: '/administrator/create', component: AdministratorCreateRoutePage },
     
 
     { path: '/customer/search', component: CustomerSearchRoutePage },

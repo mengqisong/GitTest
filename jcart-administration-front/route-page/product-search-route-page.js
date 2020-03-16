@@ -13,7 +13,7 @@ const ProductSearchRoutePage = {
         <el-select v-model="selectedStatus" placeholder="请选择状态">
             <el-option v-for="item in statuses" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
-        </el-select>f
+        </el-select>
         <br>
         <el-button type="primary" @click="handleSearchClick">搜索</el-button>
         <el-button type="primary" @click="handleClearClick">清空条件</el-button>
