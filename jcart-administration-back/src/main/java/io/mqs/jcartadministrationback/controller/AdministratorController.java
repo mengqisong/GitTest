@@ -9,6 +9,7 @@ import io.mqs.jcartadministrationback.enumeration.AdministratorStatus;
 import io.mqs.jcartadministrationback.exception.ClientException;
 import io.mqs.jcartadministrationback.po.Administrator;
 import io.mqs.jcartadministrationback.service.AdministratorService;
+import io.mqs.jcartadministrationback.util.EmailUtil;
 import io.mqs.jcartadministrationback.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,6 +41,9 @@ public class AdministratorController {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    EmailUtil emailUtil;
 
     @Value("${spring.mail.username}")
     private String fromEmail;
@@ -224,14 +228,8 @@ public class AdministratorController {
         byte[] bytes = secureRandom.generateSeed(3);
         String hex = DatatypeConverter.printHexBinary(bytes);
 
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom(fromEmail);
-        mailMessage.setTo(email);
-        mailMessage.setSubject("密码重置");
-        mailMessage.setText(hex);
-        mailSender.send(mailMessage);
-        //todo send messasge to MQ
-        emailPwdResetCodeMap.put(email,hex);
+        emailUtil.send(fromEmail, email, "jcart管理端管理员密码重置", hex);
+        emailPwdResetCodeMap.put(email, hex);
     }
 
     @PostMapping("/resetPwd")
