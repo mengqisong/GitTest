@@ -13,6 +13,7 @@ import io.mqs.jcartadministrationback.util.EmailUtil;
 import io.mqs.jcartadministrationback.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @RestController
@@ -44,6 +46,9 @@ public class AdministratorController {
 
     @Autowired
     EmailUtil emailUtil;
+
+    @Autowired
+    RedisTemplate<String,String> redisTemplate;
 
     @Value("${spring.mail.username}")
     private String fromEmail;
@@ -229,7 +234,10 @@ public class AdministratorController {
         String hex = DatatypeConverter.printHexBinary(bytes);
 
         emailUtil.send(fromEmail, email, "jcart管理端管理员密码重置", hex);
-        emailPwdResetCodeMap.put(email, hex);
+
+       /* emailPwdResetCodeMap.put(email, hex);*/
+
+        redisTemplate.opsForValue().set("EmailRest"+email,hex,5L, TimeUnit.MINUTES);
     }
 
     @PostMapping("/resetPwd")
@@ -238,7 +246,9 @@ public class AdministratorController {
         if (email == null) {
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
         }
-        String innerResetCode = emailPwdResetCodeMap.get(email);
+        /*String innerResetCode = emailPwdResetCodeMap.get(email);*/
+        String innerResetCode = redisTemplate.opsForValue().get("EmailRest" + email);
+
         String resetCode = administratorResetPwdInDTO.getResetCode();
         if (innerResetCode == null) {
             return;
@@ -258,8 +268,9 @@ public class AdministratorController {
         administrator.setEncryptedPassword(bcryptHashString);
         administratorService.update(administrator);
 
-        emailPwdResetCodeMap.remove(email);
+        /*emailPwdResetCodeMap.remove(email);*/
 
+        redisTemplate.delete("EmailRest" + email);
     }
 }
 
